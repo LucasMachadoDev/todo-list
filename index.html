@@ -10,6 +10,12 @@
         <title>TODO list</title>
         <meta name="description" content="Um app de lista de tarefas com opção de adcionar, editar, e deletar tarefas">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!--=================== GOOGLE FONTS ===================-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Murecho:wght@300;400;500;700&display=swap" rel="stylesheet">
+
         <!--=================== MYCSS ===================-->
         <link rel="stylesheet" href="./css/style.css">
 
@@ -18,7 +24,24 @@
     </head>
     <body>
         
-        
+        <section class="List--todo">
+            <div class="Container Grid">
+                <h2 class="List--title">Bem-vindo(a) a sua lista de tarefas</h2>
+
+                <div class="List--wrapper">
+                    <div class="input--field">
+                        <label for="task" class="input--title">Adicone a tarefa: </label>
+                        <input id="task" class="input--task" type="text" placeholder="Adicione a sua tarefa">
+                        <button id="taskAdd" class="btn edit">Adicionar</button>
+                    </div>
+
+                    <h2 class="List--subtitle"> Suas tarefas</h2>
+                    <div class="Task--wrapper">
+                        
+                    </div>
+                </div>
+            </div> <!-- Container -->
+        </section> <!-- List--todo -->
 
     </body>
 </html>
