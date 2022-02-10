@@ -124,7 +124,3 @@ html, body {
 .delete {
     background-color: var(--paradise-pink);
 }
-
-.done {
-    text-decoration: line-through;
-}

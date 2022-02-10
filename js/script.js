@@ -18,8 +18,7 @@ function newTask() {
         btnEdit = document.createElement('button'),
         editTask = document.createElement('input'),
         btnSave = document.createElement('button'),
-        btnDelete = document.createElement('button'),
-        cb = document.createElement('input');
+        btnDelete = document.createElement('button');
     
     span.textContent = input.value;
     btnEdit.textContent = 'Editar';
@@ -38,13 +37,11 @@ function newTask() {
     editTask.classList.add('Edit--task');
 
     editTask.setAttribute('type', 'text')
-    cb.setAttribute('type', 'checkbox');
     
     editTask.value = span.textContent
     btnEdit.addEventListener('click', () => {
         div.removeChild(btnGroup)
         div.removeChild(span)
-        div.removeChild(cb)
         div.appendChild(editTask)
         div.appendChild(btnSave)
         input.autofocus = false;
@@ -55,7 +52,6 @@ function newTask() {
             div.removeChild(editTask);
             div.removeChild(btnSave);
             div.appendChild(span);
-            div.appendChild(cb);
             div.appendChild(btnGroup);
             btnGroup.appendChild(btnEdit);
             btnGroup.appendChild(btnDelete);
@@ -67,15 +63,10 @@ function newTask() {
     })
 
     div.appendChild(span);
-    div.appendChild(cb);
     div.appendChild(btnGroup);
     btnGroup.appendChild(btnEdit);
     btnGroup.appendChild(btnDelete);
     taskList.append(div);
-
-    cb.addEventListener('click', () => {
-        (cb.checked)? span.classList.add('done') : span.classList.remove('done');
-    })
 
     input.value = '';
 };
