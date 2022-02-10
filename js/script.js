@@ -1,29 +1,81 @@
 const input = document.querySelector('#task'),
-        btn = document.querySelector('#taskAdd'),
-        container = document.querySelector('.List--wrapper'),
-        task = document.querySelector('.Task--wrapper'),
-        edit = document.querySelector('.edit'),
-        remove = document.querySelector('.delete');
+        taskList = document.querySelector('.Task--wrapper'),
+        taskSingle = document.getElementsByClassName('Task--single'),
+        taskTitle = document.getElementsByClassName('Task--title');
 
-btn.addEventListener('click', () => {
-    if(input.value != '') {
-        container.style.overflowY = 'scroll'
-        task.innerHTML += `
-            <div class="Task--single">
-                <span class="Task--title">${input.value}</span>
-                <div class="Buttons--group">
-                    <button class="btn edit" onClick="editTask()">Editar</button>
-                    <button class="btn delete" onClick="removeTask()">Excluir</button>
-                </div>
-            </div>
-        `
-    } else {
-        alert('Insira uma tarefa no input')
-    }
+addEventListener('keypress', e => {
+    (e.keyCode == 13)? newTask() : false
 })
 
-function removeTask() {
-    let single = document.querySelector('.Task--single')
-    task.removeChild(single)
-}
+function newTask() {
+    if(!input.value.trim()) {
+        alert('Insira uma tarefa no campo!');
+        return;
+    }
+    const div = document.createElement('div'),
+        span = document.createElement('span'),
+        btnGroup = document.createElement('div'),
+        btnEdit = document.createElement('button'),
+        editTask = document.createElement('input'),
+        btnSave = document.createElement('button'),
+        btnDelete = document.createElement('button'),
+        cb = document.createElement('input');
+    
+    span.textContent = input.value;
+    btnEdit.textContent = 'Editar';
+    btnDelete.textContent = 'Deletar';
+    btnSave.textContent = 'Salvar';
 
+    div.classList.add('Task--single');
+    span.classList.add('Task--title');
+    btnGroup.classList.add('Buttons--group');
+    btnEdit.classList.add('btn');
+    btnDelete.classList.add('btn');
+    btnSave.classList.add('btn');
+    btnEdit.classList.add('edit');
+    btnDelete.classList.add('delete');
+    btnSave.classList.add('Save--task');
+    editTask.classList.add('Edit--task');
+
+    editTask.setAttribute('type', 'text')
+    cb.setAttribute('type', 'checkbox');
+    
+    editTask.value = span.textContent
+    btnEdit.addEventListener('click', () => {
+        div.removeChild(btnGroup)
+        div.removeChild(span)
+        div.removeChild(cb)
+        div.appendChild(editTask)
+        div.appendChild(btnSave)
+        input.autofocus = false;
+        editTask.autofocus = true;
+        btnSave.addEventListener('click', () => {
+            span.textContent = editTask.value
+
+            div.removeChild(editTask);
+            div.removeChild(btnSave);
+            div.appendChild(span);
+            div.appendChild(cb);
+            div.appendChild(btnGroup);
+            btnGroup.appendChild(btnEdit);
+            btnGroup.appendChild(btnDelete);
+        })
+    })
+
+    btnDelete.addEventListener('click', () => {
+        div.remove()
+    })
+
+    div.appendChild(span);
+    div.appendChild(cb);
+    div.appendChild(btnGroup);
+    btnGroup.appendChild(btnEdit);
+    btnGroup.appendChild(btnDelete);
+    taskList.append(div);
+
+    cb.addEventListener('click', () => {
+        (cb.checked)? span.classList.add('done') : span.classList.remove('done');
+    })
+
+    input.value = '';
+};
